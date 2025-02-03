@@ -1,0 +1,15 @@
+id = "onyx"
+name = "Onyx"
+version = "0.0.1"
+schema_version = 1
+authors = ["Ricardo Valero <55701657+ricardo-valero@users.noreply.github.com>"]
+description = "Onyx support."
+repository = "https://github.com/onyx-lang/onyx"
+
+[language_servers.onyx]
+language = "Onyx"
+name = "Onyx Language Server"
+
+[grammars.onyx]
+repository = "https://github.com/brendanfh/tree-sitter-onyx"
+commit = "4aafe1df4f7c06af39a68116a4ec61e20076b3a4"

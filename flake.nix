@@ -301,6 +301,12 @@
             tar -C ${src} -zcvf $out/$name-$version.tar.gz *
           '';
         };
+      build-zed-onyx = pkgs.rustPlatform.buildRustPackage {
+        pname = "zed_onyx";
+        version = "0.0.1";
+        src = ./misc/zed;
+        cargoLock.lockFile = ./Cargo.lock;
+      };
     in rec {
       default = build-package {
         runtime = "ovmwasm";
@@ -308,6 +314,7 @@
       };
       onyx = default;
       compressed = build-compressed {src = default;};
+      zed_onyx = build-zed-onyx;
     });
     devShells = nixpkgs.lib.genAttrs systems (system: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -316,6 +323,7 @@
       default = pkgs.mkShell {
         packages = builtins.attrValues {
           inherit (pkgs) nixd nil alejandra wasmer;
+          # inherit (pkgs) rustc cargo rust-analyzer rustfmt;
           inherit (pkgs-self) onyx;
         };
       };
